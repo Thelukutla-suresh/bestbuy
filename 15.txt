@@ -1,0 +1,247 @@
+<div class="sidenav">
+    <div class="registration-main-text">
+        <h2>Register</h2><br>
+        <p><i>Life isn't perfect... <br>But, your outfit can be..!!!!</i></p>
+    </div>
+</div>
+<div class="main">
+    <div class="col-md-6 col-sm-12">
+        <div class="registration-form">
+            <form #userForm="ngForm" (ngSubmit)="onSubmit(userForm.value)">
+                <div class="panel-body">
+                    <div class="form-group" [class.has-error]="nameControl.invalid && nameControl.touched"
+                        [class.has-success]="nameControl.valid">
+
+                        <label for="name">UserName</label>
+
+                        <input type="text" required id="name" pattern="[a-zA-Z]{3,20}" [(ngModel)]="name"
+                            name="name" class="form-control" #nameControl="ngModel">
+
+                        <span class="help-block" *ngIf="nameControl.invalid && nameControl.touched">Full Name
+                            is Required</span>
+
+                    </div>
+                    <br>
+                    <div class="form-group" [class.has-error]="email1.invalid && email1.touched">
+                        <label for="email" class="control-label"> Email</label>
+
+                        <input type="text" id="email" required name="email" class="form-control"
+                            pattern="[a-z][a-z0-9.]+@(gmail|dherbe|yahoo)+.(com|net|in)" [(ngModel)]="email"
+                            #email1="ngModel">
+
+                        <span class="help-block" *ngIf="email1.errors?.required && email1.touched">Email is
+                            Required</span>
+
+                        <span class="help-block" *ngIf="email1.errors?.email && email1.touched ">Email is Invalid</span>
+
+                        <span class="help-block" *ngIf="email1.errors?.pattern"> Email is Invalid
+
+                        </span>
+
+                    </div>
+                    <br>
+                    <div class="form-group" [class.has-error]="passwordRef.touched && passwordRef.invalid">
+
+                        <label for="password" class="control-label">Password</label>
+
+                        <input id="password" required type="password" class="form-control" name="password"
+                            pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" [(ngModel)]="password" #passwordRef="ngModel">
+
+                        <span class="help-block" *ngIf="passwordRef.touched && passwordRef.errors?.required ">Password
+                            is required
+
+                        </span>
+
+                        <span class="help-block" *ngIf="passwordRef.errors?.pattern">Password should contain atleast one
+                            small letter,capital letter,number,special character and minimum length of 8
+
+                        </span>
+
+                    </div>
+                    <br>
+                    <div class="form-group"
+                        [class.has-error]="confirmpasswordRef.touched && confirmpasswordRef.invalid">
+
+                        <label for="confirmpassword" class="control-label">Confirm Password</label>
+
+                        <input name="confirmpassword" required id="confirmpassword" type="password" class="form-control"
+                            [(ngModel)]="confirmpassword" pattern="{{passwordRef.value}}" #confirmpasswordRef="ngModel">
+
+                        <span class="help-block"
+                            *ngIf="confirmpasswordRef.touched && confirmpasswordRef.errors?.required">Confirm Password
+                            is required
+
+                        </span>
+
+                        <span class="help-block" *ngIf=" confirmpasswordRef.errors?.pattern ">Password and Confirm
+                            Password does not match
+
+                        </span>
+
+                    </div>
+                    <br>
+                    <div class="form-group">
+
+                        <label for="securityQuestion"> Security Question</label>
+
+                        <select id="securityQuestion" name="securityQuestion" [(ngModel)]="securityQuestion" required
+                            class="form-control">
+
+                            <option value="1">Who is your role model?</option>
+
+                            <option value="2">What is your Birth place?</option>
+
+                            <option value="3">What is your School Name?</option>
+                        </select>
+
+                    </div>
+
+
+
+                    <div class="form-group">
+
+                        <label for="securityAnswer">Answer</label>
+
+                        <input id="securityAnswer" pattern="[A-Za-z]{3,20}" type="text" class="form-control" name="securityAnswer"
+                            #answerControl="ngModel" [(ngModel)]="securityAnswer" placeholder="Please enter answer" required />
+
+                        <div *ngIf='!securityAnswerControl.untouched'>
+
+                            <div *ngIf='securityAnswerControl.errors && !securityAnswerControl.pattern' class="alert alert-danger">
+                                please enter the answer
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div class="panel-footer" class="text-center">
+
+                        <button value="Register" class="btn btn-black" [disabled]="!userform.valid">Register</button>&nbsp;&nbsp;
+
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- <div class="container">
+    <form #userform="ngForm">
+ 
+ <div class="panel panel-primary">
+ 
+ <div class="panel-heading">
+ 
+ <h3 class="panel-title">Registration</h3>
+ 
+ </div>
+ 
+ <div class="panel-body">
+ <div class="form-group" [class.has-error]="firstNameControl.invalid && firstNameControl.touched" [class.has-success]="firstNameControl.valid">
+ 
+ <label for="firstName">UserName</label>
+ 
+ <input type="text" required id="firstName" pattern="[a-zA-Z]{3,20}" [(ngModel)]="name" name="firstname" class="form-control" #firstNameControl="ngModel">
+ 
+ <span class="help-block" *ngIf="firstNameControl.invalid && firstNameControl.touched">Full Name is Required</span>
+ 
+ </div>
+ 
+ <div class="form-group" [class.has-error]="email1.invalid && email1.touched">
+ <label for="email" class="control-label"> Email</label>
+ 
+ <input type="text" id="email" required name="email" class="form-control" pattern="[a-z][a-z0-9.]+@(gmail|dherbe|yahoo)+.(com|net|in)" [(ngModel)]="email" #email1="ngModel">
+ 
+ <span class="help-block" *ngIf="email1.errors?.required && email1.touched">Email is Required</span>
+ 
+ <span class="help-block" *ngIf="email1.errors?.email && email1.touched ">Email is Invalid</span>
+ 
+ <span class="help-block" *ngIf="email1.errors?.pattern"> Email is Invalid
+ 
+ </span>
+ 
+ </div>
+
+ <div class="form-group" [class.has-error]="passwordRef.touched && passwordRef.invalid">
+ 
+ <label for="password" class="control-label">Password</label>
+ 
+ <input id="password" required type="password" class="form-control" name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" [(ngModel)]="password" #passwordRef="ngModel">
+ 
+ <span class="help-block" *ngIf="passwordRef.touched && passwordRef.errors?.required ">Password is required
+ 
+ </span>
+ 
+ <span class="help-block" *ngIf="passwordRef.errors?.pattern">Password should contain atleast one small letter,capital letter,number,special character and minimum length of 8
+ 
+ </span>
+ 
+ </div>
+ 
+ <div class="form-group" [class.has-error]="confirmPasswordRef.touched && confirmPasswordRef.invalid">
+ 
+ <label for="confirmPassword" class="control-label">Confirm Password</label>
+ 
+ <input name="confirmPassword" required id="confirmPassword" type="password" class="form-control" [(ngModel)]="confirmPassword" pattern="{{passwordRef.value}}" #confirmPasswordRef="ngModel">
+ 
+ <span class="help-block" *ngIf="confirmPasswordRef.touched && confirmPasswordRef.errors?.required">Confirm Password is required
+ 
+ </span>
+ 
+ <span class="help-block" *ngIf=" confirmPasswordRef.errors?.pattern ">Password and Confirm Password does not match
+ 
+ </span>
+ 
+ </div>
+  
+ <div class="form-group">
+ 
+ <label for="securityQuestion"> Security Question</label>
+ 
+ <select id="securityQuestion" name="securityQuestion" [(ngModel)]="securityQuestion" required class="form-control">
+ 
+ <option value="What is your Mother's name?">What is your Mother's name?</option>
+ 
+ <option value="What is your Favourite Place?">What is your Favourite Place?</option>
+ 
+ <option value="What is your Pet Name?">What is your Pet Name?</option></select>
+ 
+ </div>
+ 
+ 
+ 
+ <div class="form-group">
+ 
+ <label for="answer">Answer</label>
+ 
+ <input id="answer" pattern="[A-Za-z]{3,20}" type="text" class="form-control" name="answer" #answerControl="ngModel" [(ngModel)]="answer" placeholder="Please enter answer" required />
+ 
+ <div *ngIf='!answerControl.untouched'>
+ 
+ <div *ngIf='answerControl.errors && !answerControl.pattern' class="alert alert-danger">please enter the answer
+ 
+ </div>
+ 
+ </div>
+ 
+ </div>
+
+ <div class="panel-footer" class="text-center">
+ 
+ <button value="Register" class="btn btn-primary" [disabled]="!userform.valid" (click)="validate()">Register</button>&nbsp;&nbsp;
+ 
+ <button value="Reset" class="btn btn-primary" type="reset">Reset</button>
+ 
+ </div>
+ <br/>
+ 
+ </div>
+ 
+ </div>
+ 
+ </form>
+ 
+ </div> -->
